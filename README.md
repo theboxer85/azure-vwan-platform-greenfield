@@ -57,15 +57,15 @@ The MVP was demonstrated end-to-end in a sandbox environment — live ingress tr
 
 ### Constraints
 
-- 100% Azure stack — no multi-cloud requirements
-- Bicep as the IaC language of choice (no Terraform)
+- 100% Azure stack
+- Bicep as the IaC language of choice
 - GitHub Actions as the CI/CD platform
-- Production deadline within weeks of engagement start
+- Production deadline within months of engagement start
 - Platform team responsible for connectivity only — application teams own their landing zones
 
 ### Approach
 
-Rather than starting with a commercial landing zone accelerator and working backwards, the decision was made to build a purpose-fit module from the ground up using Azure Verified Modules (AVM) as primitives where appropriate. This gave the team full visibility into every resource deployed and avoided carrying unused code paths from generic accelerators into a regulated government environment.
+Rather than just starting with a commercial landing zone accelerator and working backwards, the decision was made to trim and opinionate the accelerator and build a purpose-fit module from the ground up using Azure Verified Modules (AVM) as primitives where appropriate. This gave the team full visibility into every resource deployed and avoided carrying unused code paths from generic accelerators into a regulated government environment.
 
 The design followed three principles throughout:
 
