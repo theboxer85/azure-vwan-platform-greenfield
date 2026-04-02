@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "parFirewallPolicies": {
+      "value": [
+        {
+          "name": "afwpol-platform-prod-eastus2",
+          "location": "eastus2",
+          "threatIntelMode": "Alert",
+          "dnsProxyEnabled": true,
+          "dnsServers": [],
+          "idpsMode": "Deny",
+          "skuTier": "Premium",
+          "tags": {
+            "Environment": "Production",
+            "Project": "Prod_Connectivity",
+            "CreatedBy": "Cloud Engineering Team",
+            "Business_Unit": "TR000000129",
+            "Department_Code": "3090100031"
+          }
+        },
+        {
+          "name": "afwpol-platform-prod-centralus",
+          "location": "centralus",
+          "threatIntelMode": "Alert",
+          "dnsProxyEnabled": true,
+          "dnsServers": [],
+          "idpsMode": "Deny",
+          "skuTier": "Premium",
+          "tags": {
+            "Environment": "Production",
+            "Project": "Prod_Connectivity",
+            "CreatedBy": "Cloud Engineering Team",
+            "Business_Unit": "TR000000129",
+            "Department_Code": "3090100031"
+          }
+        }
+      ]
+    }
+  }
+}

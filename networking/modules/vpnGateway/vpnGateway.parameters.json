@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "parVpnGateways": {
+      "value": [
+        {
+          "name": "vgw-eastus2",
+          "location": "eastus2",
+          "vHubName": "vhub-eastus2",
+          "scaleUnit": 1,
+          "asn": 65515
+        },
+        {
+          "name": "vgw-centralus",
+          "location": "centralus",
+          "vHubName": "vhub-centralus",
+          "scaleUnit": 1,
+          "asn": 65515
+        }
+      ]
+    }
+  }
+}

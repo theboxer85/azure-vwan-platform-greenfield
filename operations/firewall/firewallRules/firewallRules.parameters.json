@@ -1,0 +1,56 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "parRuleCollectionGroups": {
+      "value": [
+        {
+          "firewallPolicyName": "afwpol-platform-prod-eastus2",
+          "name": "DefaultNetworkRules",
+          "priority": 1000,
+          "ruleCollections": [
+            {
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
+              "name": "Allow-DNS-And-NTP",
+              "priority": 1100,
+              "action": { "type": "Allow" },
+              "rules": [
+                {
+                  "ruleType": "NetworkRule",
+                  "name": "Allow-DNS",
+                  "ipProtocols": ["UDP"],
+                  "sourceAddresses": ["*"],
+                  "destinationAddresses": ["1.1.1.1", "8.8.8.8"],
+                  "destinationPorts": ["53"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "firewallPolicyName": "afwpol-platform-prod-centralus",
+          "name": "DefaultNetworkRules",
+          "priority": 1000,
+          "ruleCollections": [
+            {
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
+              "name": "Allow-DNS-And-NTP",
+              "priority": 1100,
+              "action": { "type": "Allow" },
+              "rules": [
+                {
+                  "ruleType": "NetworkRule",
+                  "name": "Allow-DNS",
+                  "ipProtocols": ["UDP"],
+                  "sourceAddresses": ["*"],
+                  "destinationAddresses": ["1.1.1.1", "8.8.8.8"],
+                  "destinationPorts": ["53"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

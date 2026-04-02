@@ -1,0 +1,68 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "parVwanHubId": { "value": "/subscriptions/db2b500c-6a30-4425-8ccd-3eb6f0ae83b8/resourceGroups/rg-platform-prod-eus2-01/providers/Microsoft.Network/virtualHubs/vhub-platform-prod-eastus2" },
+    "parDeployments": {
+      "value": [
+        {
+          "location": "eastus2",
+          "suffix": "eus2",
+          "networkConfig": {
+            "onlineVnet": {
+              "name": "vnet-ai-online-eus2",
+              "prefixes": ["10.20.0.0/24"],
+              "natSubnetName": "snet-pls-nat",
+              "subnets": [
+                { "name": "snet-pls-nat", "addressPrefix": "10.20.0.0/28", "isNatSubnet": true },
+                { "name": "snet-lb", "addressPrefix": "10.20.0.16/28" }
+              ]
+            },
+            "privateVnet": {
+              "name": "vnet-ai-private-eus2",
+              "prefixes": ["10.20.1.0/24"],
+              "subnets": [
+                { "name": "snet-web", "addressPrefix": "10.20.1.0/26" },
+                { "name": "snet-db", "addressPrefix": "10.20.1.64/26" }
+              ]
+            }
+          },
+          "securityConfig": {
+            "asgName": "asg-ai-web-eus2",
+            "nsgName": "nsg-ai-web-eus2",
+            "rules": [
+              { "name": "Allow-LB", "priority": 100, "direction": "Inbound", "access": "Allow", "protocol": "Tcp", "port": "443", "source": "AzureLoadBalancer", "useAsg": true }
+            ]
+          },
+          "ingressConfig": {
+            "lbName": "lb-ai-app-eus2", "lbSubnetName": "snet-lb", "staticIp": "10.20.0.20", "backendPoolName": "web-backend", "plsName": "pls-ai-app-eus2",
+            "lbRules": [ { "name": "rule-https", "protocol": "Tcp", "frontendPort": 443, "backendPort": 443, "probeName": "tcp-443" } ],
+            "lbProbes": [ { "name": "tcp-443", "protocol": "Tcp", "port": 443, "interval": 5 } ]
+          }
+        }
+      ]
+    },
+    "parGlobalAfdConfig": {
+      "value": {
+        "profileName": "afd-ai-app-prod",
+        "skuName": "Premium_AzureFrontDoor",
+        "wafName": "wafaipprod",
+        "wafEnabledState": "Enabled",
+        "wafMode": "Prevention",
+        "wafRuleSets": [ { "type": "OWASP", "version": "3.2" }, {"type": "Microsoft_BotManagerRuleSet", "version": "0.1"} ],
+        "endpointName": "ai-endpoint",
+        "originGroupName": "ai-origin-group",
+        "originHttpPort": 80,
+        "originHttpsPort": 443,
+        "routeName": "default-route",
+        "routeProtocols": [ "Http", "Https" ],
+        "routePatterns": [ "/*" ],
+        "forwardingProtocol": "HttpsOnly",
+        "linkToDefaultDomain": "Enabled",
+        "httpsRedirect": "Enabled",
+        "healthProbe": { "probePath": "/", "probeRequestType": "HEAD", "probeProtocol": "Https", "probeIntervalInSeconds": 100 },
+        "loadBalancing": { "sampleSize": 4, "successfulSamplesRequired": 3 }
+      }
+    }
+  }
+}

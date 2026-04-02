@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "parPrivateDnsZoneName": {
+      "value": "privatelink.azurewebsites.net"
+    },
+    "parVnetLinks": {
+      "value": [
+        {
+          "name": "link-vnet-extnet-sbx-eus2-01",
+          "vnetId": "/subscriptions/94c5c386-e3b4-4cbf-ac2a-90185a1c8b91/resourceGroups/rg-tesst/providers/Microsoft.Network/virtualNetworks/vnet-extnet-sbx-eus2-01"
+        }
+      ]
+    },
+    "parARecords": {
+      "value": [
+        {
+          "name": "dotnet8-webapp",
+          "ip": "10.16.10.132"
+        }
+      ]
+    },
+    "parTags": {
+      "value": {
+        "Environment": "Sandbox",
+        "ManagedBy": "Platform Engineering"
+      }
+    }
+  }
+}
+

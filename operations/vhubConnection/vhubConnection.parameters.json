@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "parVhubConnections": {
+      "value": [
+        {
+          "vHubName": "vhub-platform-prod-eus2-01",
+          "lzVnetName": "vnet-app1-prod-eastus2",
+          "lzResourceGroup": "rg-app1-prod-networking",
+          "lzSubscriptionId": "00000000-0000-0000-0000-000000000000"
+        },
+        {
+          "vHubName": "vhub-platform-prod-cus-01",
+          "lzVnetName": "vnet-app1-prod-centralus",
+          "lzResourceGroup": "rg-app1-prod-networking",
+          "lzSubscriptionId": "00000000-0000-0000-0000-000000000000"
+        }
+      ]
+    }
+  }
+}

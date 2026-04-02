@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "parSubnets": {
+      "value": [
+        {
+          "vnetName": "vnet-extnet-prod-eus2-01",
+          "name": "DNSPrivateResolverInbound",
+          "addressPrefix": "10.0.2.64/28"
+        },
+        {
+          "vnetName": "vnet-extnet-prod-eus2-01",
+          "name": "DNSPrivateResolverOutbound",
+          "addressPrefix": "10.0.2.80/28"
+        },
+        {
+          "vnetName": "vnet-extnet-prod-eus2-01",
+          "name": "AzureBastionSubnet",
+          "addressPrefix": "10.0.2.0/26"
+        },
+        {
+          "vnetName": "vnet-extnet-prod-cus-01",
+          "name": "DNSPrivateResolverInbound",
+          "addressPrefix": "10.32.2.64/28"
+        },
+        {
+          "vnetName": "vnet-extnet-prod-cus-01",
+          "name": "DNSPrivateResolverOutbound",
+          "addressPrefix": "10.32.2.80/28"
+        },
+        {
+          "vnetName": "vnet-extnet-prod-cus-01",
+          "name": "AzureBastionSubnet",
+          "addressPrefix": "10.32.2.0/26"
+        }
+      ]
+    }
+  }
+}

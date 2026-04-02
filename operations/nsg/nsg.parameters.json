@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "parNsgConfigs": {
+      "value": [
+        {
+          "name": "nsg-bastion-eastus2-01",
+          "location": "eastus2"
+        },
+        {
+          "name": "nsg-bastion-centralus-01",
+          "location": "centralus"
+        }
+      ]
+    }
+  }
+}

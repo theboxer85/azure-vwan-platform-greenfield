@@ -1,0 +1,125 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "parLocation": {
+      "value": "eastus2"
+    },
+    "parCompanyPrefix": {
+      "value": ""
+    },
+    "parVirtualWanName": {
+      "value": "vwan-platform-prod-eus2-01"
+    },
+    "parHubNamePrefix": {
+      "value": "vhub-platform-prod"
+    },
+    "parDefaultRouteName": {
+      "value": "default-to-afw"
+    },
+    "parParentFirewallPolicyName": {
+      "value": "azfwpolicy-platform-global"
+    },
+    "parParentFirewallPolicyTier": {
+      "value": "Premium"
+    },
+    "parParentFirewallIntelMode": {
+      "value": "Alert"
+    },
+    "parParentFirewallDnsProxyEnabled": {
+      "value": true
+    },
+    "parParentFirewallDnsServers": {
+      "value": []
+    },
+    "parParentFirewallSnatAutoLearn": {
+      "value": "Disabled"
+    },
+    "parParentFirewallSnatPrivateRanges": {
+      "value": []
+    },
+    "parChildFirewallPolicyNamePrefix": {
+      "value": "afwpol-platform-prod"
+    },
+    "parFirewallNamePrefix": {
+      "value": "afw-platform-prod"
+    },
+    "parHubs": {
+      "value": [
+        {
+          "addressPrefix": "10.0.0.0/23",
+          "location": "eastus2",
+          "routingPreference": "ExpressRoute",
+          "routerAutoScaleMin": 2,
+          "routingIntentDestinations": ["Internet", "PrivateTraffic"],
+          "firewallTier": "Premium",
+          "firewallAvailabilityZones": ["1", "2", "3"],
+          "firewallIntelMode": "Alert",
+          "firewallDnsProxyEnabled": true,
+          "firewallDnsServers": [],
+          "sidecarVirtualNetwork": {
+            "enabled": true,
+            "name": "vnet-extnet-prod-eus2-01",
+            "addressPrefixes": ["10.0.2.0/23"]
+          }
+        },
+        {
+          "addressPrefix": "10.32.0.0/23",
+          "location": "centralus",
+          "routingPreference": "ExpressRoute",
+          "routerAutoScaleMin": 2,
+          "routingIntentDestinations": ["Internet", "PrivateTraffic"],
+          "firewallTier": "Premium",
+          "firewallAvailabilityZones": ["1", "2", "3"],
+          "firewallIntelMode": "Alert",
+          "firewallDnsProxyEnabled": true,
+          "firewallDnsServers": [],
+          "sidecarVirtualNetwork": {
+            "enabled": true,
+            "name": "vnet-extnet-prod-cus-01",
+            "addressPrefixes": ["10.32.2.0/23"]
+          }
+        }
+      ]
+    },
+    "parDdosEnabled": {
+      "value": false
+    },
+    "parDdosPlanName": {
+      "value": "alz-ddos-plan"
+    },
+    "parTelemetryOptOut": {
+      "value": false
+    },
+    "parGlobalResourceLock": {
+      "value": {
+        "kind": "None",
+        "notes": "Created by platform vWAN module."
+      }
+    },
+    "parVirtualWanLock": {
+      "value": {
+        "kind": "None",
+        "notes": "Created by platform vWAN module."
+      }
+    },
+    "parHubLock": {
+      "value": {
+        "kind": "None",
+        "notes": "Created by platform vWAN module."
+      }
+    },
+    "parFirewallLock": {
+      "value": {
+        "kind": "None",
+        "notes": "Created by platform vWAN module."
+      }
+    },
+    "parDdosLock": {
+      "value": {
+        "kind": "None",
+        "notes": "Created by platform vWAN module."
+      }
+    }
+  }
+}

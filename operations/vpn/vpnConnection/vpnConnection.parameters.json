@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "parVpnConnections": {
+      "value": [
+        {
+          "name": "conn-east-hq",
+          "vpnGatewayName": "vgw-eastus2",
+          "vpnSiteName": "site-onprem-east",
+          "ikeEnc": "AES256",
+          "ikeInt": "SHA256",
+          "dhGroup": "DHGroup14",
+          "ipsecEnc": "AES256",
+          "ipsecInt": "SHA256",
+          "pfsGroup": "PFS2048"
+        },
+        {
+          "name": "conn-central-hq",
+          "vpnGatewayName": "vgw-centralus",
+          "vpnSiteName": "site-onprem-central",
+          "ikeEnc": "AES256",
+          "ikeInt": "SHA256",
+          "dhGroup": "DHGroup14",
+          "ipsecEnc": "AES256",
+          "ipsecInt": "SHA256",
+          "pfsGroup": "PFS2048"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "parAppName": {
+      "value": "contosoapp"
+    },
+    "parLocationShorthand": {
+      "value": "eus2"
+    },
+    "parLocation": {
+      "value": "eastus2"
+    },
+    "parEnvironment": {
+      "value": "prod"
+    },
+    "parAfdProfileId": {
+      "value": "/subscriptions/SUB_ID/resourceGroups/rg-connectivity-prod-eus2-01/providers/Microsoft.Cdn/profiles/afd-platform-prod-eus2-01"
+    },
+    "parWafBasePolicyId": {
+      "value": "/subscriptions/SUB_ID/resourceGroups/rg-connectivity-prod-eus2-01/providers/Microsoft.Network/frontdoorwebapplicationfirewallpolicies/wafpolicyplatformprodeus201"
+    },
+    "parPlsResourceId": {
+      "value": "/subscriptions/LZ_SUB_ID/resourceGroups/rg-lz-contosoapp/providers/Microsoft.Network/privateLinkServices/pls-contosoapp-prod-eus2-01"
+    },
+    "parIlbFrontendIp": {
+      "value": "10.16.10.36"
+    },
+    "parWafMode": {
+      "value": "Prevention"
+    },
+    "parCustomDomainId": {
+      "value": ""
+    },
+    "parHealthProbePath": {
+      "value": "/"
+    },
+    "parTags": {
+      "value": {
+        "Environment": "Production",
+        "Application": "contosoapp",
+        "ManagedBy": "Platform Engineering"
+      }
+    }
+  }
+}

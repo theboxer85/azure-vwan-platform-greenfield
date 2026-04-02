@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "parVpnSites": {
+      "value": [
+        {
+          "name": "site-onprem-east",
+          "location": "eastus2",
+          "vWanName": "vwan-platform-prod",
+          "publicIp": "203.0.113.10",
+          "peerAsn": 65001,
+          "peerBgpIp": "169.254.21.1"
+        },
+        {
+          "name": "site-onprem-central",
+          "location": "centralus",
+          "vWanName": "vwan-platform-prod",
+          "publicIp": "203.0.113.20",
+          "peerAsn": 65002,
+          "peerBgpIp": "169.254.22.1"
+        }
+      ]
+    }
+  }
+}

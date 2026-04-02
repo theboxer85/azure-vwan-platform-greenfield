@@ -1,0 +1,18 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "parLogAnalyticsWorkspaceId": {
+      "value": "/subscriptions/94c5c386-e3b4-4cbf-ac2a-90185a1c8b91/resourcegroups/rg-sbx-sentinel-eus2-01/providers/microsoft.operationalinsights/workspaces/law-sbx-sentinel-eus2-01"
+    },
+    "parFirewallNames": {
+      "value": ["afw-platform-prod-eastus2", "afw-platform-prod-centralus"]
+    },
+    "parPolicyNames": {
+      "value": ["afwpol-platform-prod-eastus2", "afwpol-platform-prod-centralus"]
+    },
+    "parBastionNames": {
+      "value": ["bas-extnet-prod-eastus2", "bas-extnet-prod-centralus"]
+    }
+  }
+}
