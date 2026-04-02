@@ -1,0 +1,338 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 680 1420">
+  <style>
+    text { font-family: 'Segoe UI', -apple-system, sans-serif; }
+    .th  { font-size: 13px; font-weight: 600; }
+    .ts  { font-size: 11px; font-weight: 400; }
+    .title { font-size: 15px; font-weight: 600; }
+
+    /* ── Light mode ── */
+    .fill-purple  { fill: #EEEDFE; stroke: #534AB7; }
+    .text-purple  { fill: #3C3489; }
+    .texts-purple { fill: #534AB7; }
+
+    .fill-teal    { fill: #E1F5EE; stroke: #0F6E56; }
+    .text-teal    { fill: #085041; }
+    .texts-teal   { fill: #0F6E56; }
+
+    .fill-coral   { fill: #FAECE7; stroke: #993C1D; }
+    .text-coral   { fill: #712B13; }
+    .texts-coral  { fill: #993C1D; }
+
+    .fill-amber   { fill: #FAEEDA; stroke: #854F0B; }
+    .text-amber   { fill: #633806; }
+
+    .fill-blue    { fill: #E6F1FB; stroke: #185FA5; }
+    .text-blue    { fill: #0C447C; }
+    .texts-blue   { fill: #185FA5; }
+
+    .fill-pink    { fill: #FBEAF0; stroke: #993556; }
+    .text-pink    { fill: #72243E; }
+    .texts-pink   { fill: #993556; }
+
+    .fill-gray    { fill: #F1EFE8; stroke: #5F5E5A; }
+    .text-gray    { fill: #444441; }
+    .texts-gray   { fill: #5F5E5A; }
+
+    .fill-green   { fill: #EAF3DE; stroke: #3B6D11; }
+    .text-green   { fill: #27500A; }
+    .texts-green  { fill: #3B6D11; }
+
+    .arr          { stroke: #888780; stroke-width: 1.5; fill: none; }
+    .arr-coral    { stroke: #993C1D; stroke-width: 1; fill: none; }
+    .leader       { stroke: #B4B2A9; stroke-width: 0.5; stroke-dasharray: 3 2; fill: none; }
+    .text-muted   { fill: #888780; }
+    .divider      { stroke: #D3D1C7; stroke-width: 0.5; }
+
+    /* ── Dark mode overrides ── */
+    @media (prefers-color-scheme: dark) {
+      .fill-purple  { fill: #3C3489; stroke: #AFA9EC; }
+      .text-purple  { fill: #CECBF6; }
+      .texts-purple { fill: #AFA9EC; }
+
+      .fill-teal    { fill: #085041; stroke: #5DCAA5; }
+      .text-teal    { fill: #9FE1CB; }
+      .texts-teal   { fill: #5DCAA5; }
+
+      .fill-coral   { fill: #712B13; stroke: #F0997B; }
+      .text-coral   { fill: #F5C4B3; }
+      .texts-coral  { fill: #F0997B; }
+
+      .fill-amber   { fill: #633806; stroke: #FAC775; }
+      .text-amber   { fill: #FAC775; }
+
+      .fill-blue    { fill: #0C447C; stroke: #85B7EB; }
+      .text-blue    { fill: #B5D4F4; }
+      .texts-blue   { fill: #85B7EB; }
+
+      .fill-pink    { fill: #72243E; stroke: #ED93B1; }
+      .text-pink    { fill: #F4C0D1; }
+      .texts-pink   { fill: #ED93B1; }
+
+      .fill-gray    { fill: #444441; stroke: #B4B2A9; }
+      .text-gray    { fill: #D3D1C7; }
+      .texts-gray   { fill: #B4B2A9; }
+
+      .fill-green   { fill: #27500A; stroke: #97C459; }
+      .text-green   { fill: #C0DD97; }
+      .texts-green  { fill: #97C459; }
+
+      .arr          { stroke: #B4B2A9; }
+      .arr-coral    { stroke: #F0997B; }
+      .leader       { stroke: #5F5E5A; }
+      .text-muted   { fill: #888780; }
+      .divider      { stroke: #5F5E5A; }
+    }
+  </style>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- TITLE                                                        -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <text class="title text-muted" x="340" y="26" text-anchor="middle">Final deployed topology — runtime state</text>
+  <text class="ts text-muted"    x="340" y="44" text-anchor="middle">Each layer: one .bicep + one .parameters.json deployed via GitHub Actions</text>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- GLOBAL RESOURCES                                             -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <rect class="fill-pink" x="30"  y="60"  width="620" height="108" rx="14" stroke-width="0.5"/>
+  <text class="th text-pink"  x="50"  y="84">Global resources</text>
+  <text class="ts texts-pink" x="50"  y="100">afd-profile.bicep + afd-profile.parameters.prod.json</text>
+
+  <!-- AFD profile box -->
+  <rect class="fill-pink" x="48"  y="110" width="256" height="46" rx="8" stroke-width="0.5"/>
+  <text class="th text-pink"  x="176" y="130" text-anchor="middle">afd-platform-prod-eus2-01</text>
+  <text class="ts texts-pink" x="176" y="146" text-anchor="middle">AFD Premium — shared profile</text>
+
+  <!-- WAF policy box -->
+  <rect class="fill-gray" x="320" y="110" width="312" height="46" rx="8" stroke-width="0.5"/>
+  <text class="th text-gray"  x="476" y="130" text-anchor="middle">wafpolicyplatformprodeus201</text>
+  <text class="ts texts-gray" x="476" y="146" text-anchor="middle">Base WAF — DefaultRuleSet 2.1 + BotManager 1.1</text>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- PER-APP AFD ONBOARDING                                       -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <rect class="fill-pink" x="30"  y="186" width="620" height="92"  rx="14" stroke-width="0.5"/>
+  <text class="th text-pink"  x="50"  y="208">Per-app AFD onboarding</text>
+  <text class="ts texts-pink" x="50"  y="224">afd-onboard.bicep + parameters/{appName}/afd-onboard.parameters.prod.json</text>
+
+  <rect class="fill-pink" x="48"  y="234" width="128" height="32" rx="6" stroke-width="0.5"/>
+  <text class="ts text-pink" x="112" y="254" text-anchor="middle">endpoint per app</text>
+
+  <rect class="fill-gray" x="188" y="234" width="128" height="32" rx="6" stroke-width="0.5"/>
+  <text class="ts text-gray" x="252" y="254" text-anchor="middle">per-app WAF policy</text>
+
+  <rect class="fill-pink" x="328" y="234" width="128" height="32" rx="6" stroke-width="0.5"/>
+  <text class="ts text-pink" x="392" y="254" text-anchor="middle">origin → PLS</text>
+
+  <rect class="fill-gray" x="468" y="234" width="164" height="32" rx="6" stroke-width="0.5"/>
+  <text class="ts text-gray" x="550" y="254" text-anchor="middle">route + security policy</text>
+
+  <!-- arrow: global → onboarding -->
+  <line x1="340" y1="168" x2="340" y2="184" class="arr" marker-end="url(#arrow)"/>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- CONNECTIVITY SUBSCRIPTION                                    -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <rect class="fill-purple" x="30"  y="296" width="620" height="566" rx="16" stroke-width="0.5"/>
+  <text class="th text-purple"  x="50"  y="322">Connectivity subscription</text>
+  <text class="ts texts-purple" x="50"  y="338">vwan.bicep + vwan.parameters.json</text>
+
+  <!-- vWAN resource -->
+  <rect class="fill-purple" x="230" y="352" width="220" height="42" rx="8" stroke-width="0.5"/>
+  <text class="th text-purple"  x="340" y="370" text-anchor="middle">vwan-platform-prod</text>
+  <text class="ts texts-purple" x="340" y="384" text-anchor="middle">Virtual WAN — Standard SKU</text>
+
+  <!-- Parent FW Policy -->
+  <rect class="fill-coral" x="190" y="414" width="300" height="42" rx="8" stroke-width="0.5"/>
+  <text class="th text-coral"  x="340" y="432" text-anchor="middle">azfwpolicy-platform-global</text>
+  <text class="ts texts-coral" x="340" y="448" text-anchor="middle">Parent policy — DNS proxy, threat intel, SNAT</text>
+
+  <!-- vWAN → parent policy -->
+  <line x1="340" y1="394" x2="340" y2="412" class="arr" marker-end="url(#arrow)"/>
+
+  <!-- inherit arrows: parent → hub containers -->
+  <line x1="264" y1="456" x2="182" y2="476" class="arr-coral" marker-end="url(#arrow)"/>
+  <line x1="416" y1="456" x2="498" y2="476" class="arr-coral" marker-end="url(#arrow)"/>
+  <text class="ts texts-coral" x="192" y="470">inherits</text>
+  <text class="ts texts-coral" x="422" y="470">inherits</text>
+
+  <!-- ── Hub EUS2 ───────────────────────────────────────────── -->
+  <rect class="fill-teal" x="48"  y="474" width="278" height="358" rx="12" stroke-width="0.5"/>
+  <text class="th text-teal"  x="68"  y="498">vhub-platform-prod-eastus2</text>
+  <text class="ts texts-teal" x="68"  y="512">10.0.0.0/23 · routing intent on</text>
+
+  <rect class="fill-coral" x="64"  y="524" width="246" height="40" rx="6" stroke-width="0.5"/>
+  <text class="th text-coral"  x="187" y="542" text-anchor="middle">afwpol-platform-prod-eastus2</text>
+  <text class="ts texts-coral" x="187" y="556" text-anchor="middle">Child policy — regional rules</text>
+
+  <rect class="fill-amber" x="64"  y="574" width="246" height="40" rx="6" stroke-width="0.5"/>
+  <text class="th text-amber" x="187" y="592" text-anchor="middle">afw-platform-prod-eastus2</text>
+  <text class="ts text-amber" x="187" y="606" text-anchor="middle">Premium · AZ 1/2/3 · DNS proxy</text>
+
+  <rect class="fill-gray"  x="64"  y="624" width="246" height="36" rx="6" stroke-width="0.5"/>
+  <text class="th text-gray"  x="187" y="642" text-anchor="middle">Routing intent</text>
+  <text class="ts texts-gray" x="187" y="656" text-anchor="middle">Internet + PrivateTraffic → firewall</text>
+
+  <rect class="fill-blue"  x="64"  y="670" width="246" height="52" rx="6" stroke-width="0.5"/>
+  <text class="th text-blue"  x="187" y="690" text-anchor="middle">vnet-extnet-prod-eus2-01</text>
+  <text class="ts texts-blue" x="187" y="704" text-anchor="middle">10.0.2.0/23 · Bastion · DNS Resolver</text>
+  <text class="ts texts-blue" x="187" y="716" text-anchor="middle">Private DNS zones linked here</text>
+
+  <!-- EUS2 internal arrows -->
+  <line x1="187" y1="564" x2="187" y2="572" class="arr" marker-end="url(#arrow)"/>
+  <line x1="187" y1="614" x2="187" y2="622" class="arr" marker-end="url(#arrow)"/>
+  <line x1="187" y1="660" x2="187" y2="668" class="arr" marker-end="url(#arrow)"/>
+
+  <!-- EUS2 day-2 label -->
+  <text class="ts text-muted" x="187" y="748" text-anchor="middle">operations/ · bastion · firewallRules</text>
+  <text class="ts text-muted" x="187" y="762" text-anchor="middle">privateDNS · sidecarSubnets · diagnostics</text>
+  <text class="ts text-muted" x="187" y="776" text-anchor="middle">vhubConnection · vpn (future)</text>
+  <text class="ts text-muted" x="187" y="790" text-anchor="middle">(.bicep + .parameters.json each)</text>
+
+  <!-- ── Hub CUS ────────────────────────────────────────────── -->
+  <rect class="fill-teal" x="354" y="474" width="278" height="358" rx="12" stroke-width="0.5"/>
+  <text class="th text-teal"  x="374" y="498">vhub-platform-prod-centralus</text>
+  <text class="ts texts-teal" x="374" y="512">10.32.0.0/23 · routing intent on</text>
+
+  <rect class="fill-coral" x="370" y="524" width="246" height="40" rx="6" stroke-width="0.5"/>
+  <text class="th text-coral"  x="493" y="542" text-anchor="middle">afwpol-platform-prod-centralus</text>
+  <text class="ts texts-coral" x="493" y="556" text-anchor="middle">Child policy — regional rules</text>
+
+  <rect class="fill-amber" x="370" y="574" width="246" height="40" rx="6" stroke-width="0.5"/>
+  <text class="th text-amber" x="493" y="592" text-anchor="middle">afw-platform-prod-centralus</text>
+  <text class="ts text-amber" x="493" y="606" text-anchor="middle">Premium · AZ 1/2/3 · DNS proxy</text>
+
+  <rect class="fill-gray"  x="370" y="624" width="246" height="36" rx="6" stroke-width="0.5"/>
+  <text class="th text-gray"  x="493" y="642" text-anchor="middle">Routing intent</text>
+  <text class="ts texts-gray" x="493" y="656" text-anchor="middle">Internet + PrivateTraffic → firewall</text>
+
+  <rect class="fill-blue"  x="370" y="670" width="246" height="52" rx="6" stroke-width="0.5"/>
+  <text class="th text-blue"  x="493" y="690" text-anchor="middle">vnet-extnet-prod-cus-01</text>
+  <text class="ts texts-blue" x="493" y="704" text-anchor="middle">10.32.2.0/23 · Bastion · DNS Resolver</text>
+  <text class="ts texts-blue" x="493" y="716" text-anchor="middle">DR region</text>
+
+  <!-- CUS internal arrows -->
+  <line x1="493" y1="564" x2="493" y2="572" class="arr" marker-end="url(#arrow)"/>
+  <line x1="493" y1="614" x2="493" y2="622" class="arr" marker-end="url(#arrow)"/>
+  <line x1="493" y1="660" x2="493" y2="668" class="arr" marker-end="url(#arrow)"/>
+
+  <!-- CUS day-2 label -->
+  <text class="ts text-muted" x="493" y="748" text-anchor="middle">Same operations/ modules</text>
+  <text class="ts text-muted" x="493" y="762" text-anchor="middle">deployed per-hub when needed</text>
+  <text class="ts text-muted" x="493" y="776" text-anchor="middle">(.bicep + .parameters.json each)</text>
+
+  <!-- ── vHub connection note ─────────────────────────────── -->
+  <line x1="80" y1="862" x2="600" y2="862" class="divider"/>
+  <text class="ts text-muted" x="340" y="878" text-anchor="middle">vhubConnection.bicep + vhubConnection.parameters.json · enableInternetSecurity: true required</text>
+
+  <!-- arrow: connectivity → landing zone -->
+  <line x1="340" y1="864" x2="340" y2="882" class="arr" marker-end="url(#arrow)"/>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- LANDING ZONE SUBSCRIPTION                                    -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <rect class="fill-green" x="30"  y="892" width="620" height="432" rx="16" stroke-width="0.5"/>
+  <text class="th text-green"  x="50"  y="918">Landing zone subscription — per app team</text>
+  <text class="ts texts-green" x="50"  y="934">lz-network.bicep + parameters/{appName}/lz-network.parameters.json</text>
+
+  <!-- VNet container -->
+  <rect class="fill-green" x="48"  y="946" width="592" height="348" rx="12" stroke-width="0.5"/>
+  <text class="th text-green" x="68"  y="970">vnet-contosoapp-prod-eastus2-01  ·  10.16.10.0/24 + 10.16.11.0/24</text>
+
+  <!-- Five subnets -->
+  <rect class="fill-teal"  x="62"  y="982" width="98"  height="52" rx="6" stroke-width="0.5"/>
+  <text class="th text-teal"   x="111" y="1000" text-anchor="middle">snet-pls-nat</text>
+  <text class="ts texts-teal"  x="111" y="1014" text-anchor="middle">10.16.10.0/27</text>
+  <text class="ts texts-teal"  x="111" y="1026" text-anchor="middle">PLS NAT IPs</text>
+
+  <rect class="fill-blue"  x="170" y="982" width="98"  height="52" rx="6" stroke-width="0.5"/>
+  <text class="th text-blue"   x="219" y="1000" text-anchor="middle">snet-lb</text>
+  <text class="ts texts-blue"  x="219" y="1014" text-anchor="middle">10.16.10.32/28</text>
+  <text class="ts texts-blue"  x="219" y="1026" text-anchor="middle">ILB frontend</text>
+
+  <rect class="fill-green" x="278" y="982" width="98"  height="52" rx="6" stroke-width="0.5"/>
+  <text class="th text-green"  x="327" y="1000" text-anchor="middle">snet-web</text>
+  <text class="ts texts-green" x="327" y="1014" text-anchor="middle">10.16.10.64/26</text>
+  <text class="ts texts-green" x="327" y="1026" text-anchor="middle">Web VMs</text>
+
+  <rect class="fill-amber" x="386" y="982" width="98"  height="52" rx="6" stroke-width="0.5"/>
+  <text class="th text-amber"  x="435" y="1000" text-anchor="middle">snet-app</text>
+  <text class="ts text-amber"  x="435" y="1014" text-anchor="middle">10.16.10.128/26</text>
+  <text class="ts text-amber"  x="435" y="1026" text-anchor="middle">App tier</text>
+
+  <rect class="fill-coral" x="494" y="982" width="98"  height="52" rx="6" stroke-width="0.5"/>
+  <text class="th text-coral"  x="543" y="1000" text-anchor="middle">snet-db</text>
+  <text class="ts texts-coral" x="543" y="1014" text-anchor="middle">10.16.10.192/26</text>
+  <text class="ts texts-coral" x="543" y="1026" text-anchor="middle">DB tier</text>
+
+  <!-- NSG labels -->
+  <text class="ts text-muted" x="111" y="1044" text-anchor="middle">no NSG</text>
+  <text class="ts text-muted" x="219" y="1044" text-anchor="middle">NSG: AFD.Backend</text>
+  <text class="ts text-muted" x="327" y="1044" text-anchor="middle">NSG: LB + PLS NAT</text>
+  <text class="ts text-muted" x="435" y="1044" text-anchor="middle">NSG: web CIDR</text>
+  <text class="ts text-muted" x="543" y="1044" text-anchor="middle">NSG: app CIDR</text>
+
+  <!-- PLS resource -->
+  <rect class="fill-teal"  x="62"  y="1062" width="200" height="40" rx="6" stroke-width="0.5"/>
+  <text class="th text-teal"   x="162" y="1080" text-anchor="middle">pls-contosoapp-prod-eus2-01</text>
+  <text class="ts texts-teal"  x="162" y="1094" text-anchor="middle">visibility: * · autoApproval: *</text>
+
+  <!-- ILB resource -->
+  <rect class="fill-blue"  x="272" y="1062" width="200" height="40" rx="6" stroke-width="0.5"/>
+  <text class="th text-blue"   x="372" y="1080" text-anchor="middle">lbi-contosoapp-prod-eus2-01</text>
+  <text class="ts texts-blue"  x="372" y="1094" text-anchor="middle">Standard SKU · 10.16.10.36</text>
+
+  <!-- Web VM -->
+  <rect class="fill-green" x="482" y="1062" width="150" height="40" rx="6" stroke-width="0.5"/>
+  <text class="th text-green"  x="557" y="1080" text-anchor="middle">vm-web-01</text>
+  <text class="ts texts-green" x="557" y="1094" text-anchor="middle">nginx · 10.16.10.68</text>
+
+  <!-- PLS → ILB → VM arrows -->
+  <line x1="262" y1="1082" x2="270" y2="1082" class="arr" stroke="#0F6E56" marker-end="url(#arrow)"/>
+  <line x1="472" y1="1082" x2="480" y2="1082" class="arr" stroke="#185FA5" marker-end="url(#arrow)"/>
+
+  <!-- Bastion subnet -->
+  <rect class="fill-gray"  x="62"  y="1118" width="200" height="38" rx="6" stroke-width="0.5"/>
+  <text class="th text-gray"   x="162" y="1136" text-anchor="middle">AzureBastionSubnet</text>
+  <text class="ts texts-gray"  x="162" y="1150" text-anchor="middle">10.16.11.0/26 · Bastion Standard</text>
+
+  <!-- ASGs -->
+  <rect class="fill-green" x="272" y="1118" width="360" height="38" rx="6" stroke-width="0.5"/>
+  <text class="th text-green"  x="452" y="1136" text-anchor="middle">ASGs — web · app · db</text>
+  <text class="ts texts-green" x="452" y="1150" text-anchor="middle">NIC-level grouping for NSG source/dest rules</text>
+
+  <!-- Ingress note -->
+  <text class="ts text-muted" x="340" y="1188" text-anchor="middle">Ingress: AFD → PLS → ILB → VM  (Microsoft backbone — never traverses hub firewall)</text>
+  <text class="ts text-muted" x="340" y="1204" text-anchor="middle">Egress: VM → vHub → Azure Firewall → Internet  (routing intent enforced)</text>
+  <text class="ts text-muted" x="340" y="1220" text-anchor="middle">TLS: AFD terminates client cert · re-encrypts HTTPS to backend · min TLS 1.2</text>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- LEGEND / DEPLOYMENT PATTERN                                  -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <rect class="fill-gray" x="30" y="1248" width="620" height="152" rx="12" stroke-width="0.5"/>
+  <text class="th text-gray" x="50" y="1272">Deployment pattern — every module follows this tandem</text>
+
+  <rect class="fill-purple" x="50"  y="1284" width="128" height="30" rx="6" stroke-width="0.5"/>
+  <text class="ts text-purple" x="114" y="1303" text-anchor="middle">module.bicep</text>
+
+  <line x1="180" y1="1299" x2="216" y2="1299" class="arr" marker-end="url(#arrow)"/>
+
+  <rect class="fill-teal"   x="218" y="1284" width="178" height="30" rx="6" stroke-width="0.5"/>
+  <text class="ts text-teal"  x="307" y="1303" text-anchor="middle">module.parameters.json</text>
+
+  <line x1="398" y1="1299" x2="434" y2="1299" class="arr" marker-end="url(#arrow)"/>
+
+  <rect class="fill-amber"  x="436" y="1284" width="196" height="30" rx="6" stroke-width="0.5"/>
+  <text class="ts text-amber" x="534" y="1303" text-anchor="middle">GitHub Actions pipeline</text>
+
+  <line x1="80"  y1="1332" x2="632" y2="1332" class="divider"/>
+
+  <text class="ts text-muted" x="50" y="1350">New region: add hub entry to vwan.parameters.json only — no template changes</text>
+  <text class="ts text-muted" x="50" y="1368">New app: add parameters/{appName}/ folder with two JSON files, raise PR — platform team reviews and merges</text>
+  <text class="ts text-muted" x="50" y="1386">New DNS zone: add zone + VNet link + A records to privateDNS.parameters.json only</text>
+</svg>
