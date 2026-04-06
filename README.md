@@ -1,6 +1,6 @@
 # Azure Platform Connectivity — Greenfield Case Study
 
-> A production-grade Azure connectivity platform built from scratch for a state government agency. This repository contains the full Infrastructure-as-Code for a Virtual WAN hub-and-spoke network fabric, Azure Firewall Premium with parent/child policy hierarchy, Azure Front Door Premium as a shared ingress platform, and a suite of day-2 operations modules — all deployed via GitHub Actions CI/CD pipelines.
+> A production-grade Azure connectivity platform built from scratch for a state government agency. This repository contains the full Infrastructure-as-Code for a Virtual WAN hub-and-spoke network fabric, Azure Firewall Premium with parent/child policy hierarchy, Azure Front Door Premium as a shared ingress platform, and a suite of day-2 operations modules, all deployed via GitHub Actions CI/CD pipelines.
 
 ---
 
@@ -25,18 +25,18 @@
 
 ## 1. Project Context
 
-This repository represents the connectivity subscription layer of a greenfield Azure tenant built for a state government agency with no prior cloud infrastructure. The engagement started with a blank Azure enrollment — no subscriptions, no governance structure, no naming conventions, no network design, no IaC tooling, no CI/CD pipelines, and no documented processes.
+This repository represents the connectivity subscription layer of a greenfield Azure tenant built for a state government agency with no prior cloud infrastructure. The engagement started with a blank Azure enrollment with no subscriptions, no governance structure, no naming conventions, no network design, no IaC tooling, no CI/CD pipelines, and no documented processes.
 
 The platform team's mandate was to design and deliver a production-grade cloud network fabric that would:
 
 - Support multiple application teams onboarding workloads concurrently
 - Enforce Zero-Trust network segmentation at every layer
-- Provide a secure, scalable public ingress path for web-facing applications
+- Provide a secure, scalable public ingress path for web facing applications
 - Force all egress traffic through centralized inspection
 - Be fully codified in Infrastructure-as-Code with no manual portal deployments
 - Support a DR strategy spanning two Azure regions
 
-The MVP was demonstrated end-to-end in a sandbox environment — live ingress traffic flowing from a browser through Azure Front Door, through a Private Link Service, through an Internal Load Balancer, to a web VM — before any production deployment began.
+The MVP was demonstrated end-to-end in a sandbox environment with live ingress traffic flowing from a browser through Azure Front Door, through a Private Link Service, through an Internal Load Balancer, to a web VM before any production deployment began.
 
 ---
 
@@ -61,7 +61,7 @@ The MVP was demonstrated end-to-end in a sandbox environment — live ingress tr
 - Bicep as the IaC language of choice
 - GitHub Actions as the CI/CD platform
 - Production deadline within months of engagement start
-- Platform team responsible for connectivity only — application teams own their landing zones
+- Platform team responsible for connectivity only as application teams own their landing zones
 
 ### Approach
 
@@ -194,11 +194,11 @@ Requires: NSG rule allowing Bastion subnet CIDR inbound on 22/3389
 
 **Defense:**
 
-vWAN provides a fully managed routing fabric. With routing intent enabled, Microsoft handles BGP route propagation to all connected spokes automatically — no route tables to maintain, no UDR updates when new spokes are added, no risk of a missed UDR creating a routing black hole. At scale across dozens of landing zone VNets, manual UDR management becomes a reliability risk.
+vWAN provides a fully managed routing fabric. With routing intent enabled, Microsoft handles BGP route propagation to all connected spokes automatically with no route tables to maintain, no UDR updates when new spokes are added, no risk of a missed UDR creating a routing black hole. At scale across dozens of landing zone VNets, manual UDR management becomes a reliability risk.
 
 The alternative — hub VNet with Azure Firewall — requires manually maintaining route tables on every spoke subnet pointing `0.0.0.0/0` to the firewall private IP. Every new spoke means new route table entries. Every firewall migration or IP change means updating every spoke. vWAN eliminates this class of operational error entirely.
 
-The tradeoff is cost — vWAN has a hub infrastructure charge on top of the firewall. For a government agency deploying to production with a multi-region DR requirement, the operational reliability benefit outweighed the cost delta.
+The tradeoff is cost. vWAN has a hub infrastructure charge on top of the firewall. For a government agency deploying to production with a multi-region DR requirement, the operational reliability benefit outweighed the cost.
 
 ### 4.2 Why Azure Firewall Premium over Standard
 
@@ -228,9 +228,9 @@ Critical implementation note: `enableInternetSecurity` must be set to `true` on 
 
 Application Gateway is a regional resource. For a multi-region deployment, each region would need its own Application Gateway per app, with Traffic Manager in front for failover. This multiplies cost, operational surface area, and failure domains.
 
-Front Door Premium is a global anycast service — it handles geographic distribution, failover, and WAF in a single resource. The Private Link origin feature (Premium-only) allows AFD to route traffic to an Internal Load Balancer with no public IP exposure on any backend resource, which is a hard security requirement.
+Front Door Premium is a global anycast service that handles geographic distribution, failover, and WAF in a single resource. The Private Link origin feature (Premium-only) allows AFD to route traffic to an Internal Load Balancer with no public IP exposure on any backend resource, which is a hard security requirement.
 
-The shared profile model — one AFD Premium profile with per-app endpoints — means app teams get enterprise-grade global ingress without managing their own AFD infrastructure. Platform engineering maintains WAF policy centrally.
+The shared profile model of one AFD Premium profile with per-app endpoints means app teams get enterprise-scale global ingress without managing their own AFD infrastructure. Platform engineering maintains WAF policy centrally.
 
 ### 4.5 Why Private Link Service over public ILB
 
@@ -238,7 +238,7 @@ The shared profile model — one AFD Premium profile with per-app endpoints — 
 
 **Defense:**
 
-The requirement was no public IP exposure on backend resources. Private Link Service allows AFD to connect to the ILB via Microsoft's backbone network, never traversing the public internet. The PLS acts as the connection broker — AFD creates a private endpoint in Microsoft-managed infrastructure that connects to the PLS, and the PLS routes to the ILB.
+The requirement was no public IP exposure on backend resources. Private Link Service allows AFD to connect to the ILB via Microsoft's backbone network, never traversing the public internet. The PLS acts as the connection broker. AFD creates a private endpoint in Microsoft-managed infrastructure that connects to the PLS, and the PLS routes to the ILB.
 
 This also means the ingress traffic path (AFD → PLS → ILB → VM) is completely separate from the egress path (VM → vHub Firewall → Internet). Ingress never touches the hub firewall, preserving firewall throughput for egress and east-west inspection.
 
@@ -263,7 +263,7 @@ The `parameters/{appName}/` pattern keeps all platform infrastructure in one pla
 
 **Defense:**
 
-Azure Firewall policy inheritance allows org-wide rules (DNS proxy config, threat intel mode, SNAT private ranges) to be defined once and propagate to all regional firewalls automatically. Without inheritance, the same rule set would need to be maintained separately per region — creating drift risk and doubling the change surface for every rule update.
+Azure Firewall policy inheritance allows org-wide rules (DNS proxy config, threat intel mode, SNAT private ranges) to be defined once and propagate to all regional firewalls automatically. Without inheritance, the same rule set would need to be maintained separately per region creating drift risk and doubling the change surface for every rule update.
 
 The constraint: parent and child policies must reside in the same Azure region. A policy can be *associated* with a firewall in any region, but the policy resource itself must be co-located with its parent. All policies are therefore created in `parLocation` (East US 2) and the Central US firewall references its child policy cross-region.
 
@@ -273,7 +273,7 @@ The constraint: parent and child policies must reside in the same Azure region. 
 
 **Defense:**
 
-Virtual Hub address space cannot host arbitrary subnets — it is reserved for hub infrastructure (router, firewall, gateways). Bastion and DNS Private Resolver require actual subnet resources in a standard VNet. The sidecar VNet pattern places these management resources adjacent to the hub, peered via vWAN, so they participate in the hub routing fabric without consuming hub address space.
+Virtual Hub address space cannot host arbitrary subnets, rather, it is reserved for hub infrastructure (router, firewall, gateways). Bastion and DNS Private Resolver require actual subnet resources in a standard VNet. The sidecar VNet pattern places these management resources adjacent to the hub, peered via vWAN, so they participate in the hub routing fabric without consuming hub address space.
 
 ---
 
@@ -380,7 +380,7 @@ Per landing zone onboarding:
 
 ### vWAN deployment time
 
-The vWAN deployment (Tier 1) is the longest step — approximately 30–45 minutes due to hub provisioning and firewall deployment. All other tiers are 5–15 minutes. Plan deployments accordingly and do not interrupt the vWAN deployment once started.
+The vWAN deployment (Tier 1) is the longest step, approximately 30–45 minutes due to hub provisioning and firewall deployment. All other tiers are 5–15 minutes. Plan deployments accordingly and do not interrupt the vWAN deployment once started.
 
 ---
 
@@ -462,7 +462,7 @@ Deploys once per application team onboarding. Creates all app-specific AFD resou
 
 ### `operations/firewall/firewallRules/firewallRules.bicep`
 
-Day-2 module for managing firewall rule collection groups. Targets existing firewall policies by name — does not touch the policy resource itself, avoiding ARM PUT conflicts with the parent template.
+Day-2 module for managing firewall rule collection groups. Targets existing firewall policies by name and does not touch the policy resource itself, avoiding ARM PUT conflicts with the parent template.
 
 **Pattern:** Pass an array of rule collection group objects. Each object specifies the `firewallPolicyName`, group `name`, `priority`, and `ruleCollections`. Multiple policies (East US 2 and Central US) can be updated in a single deployment.
 
@@ -541,7 +541,7 @@ The `ResourceGroup_Level_Deployment.yml` workflow takes three inputs:
 | `resourceGroupName` | Target resource group |
 | `subscriptionId` | Target subscription |
 
-The switch statement pattern means adding a new deployment target requires only adding a `case` to the switch — the rest of the workflow is reused.
+The switch statement pattern means adding a new deployment target requires only adding a `case` to the switch while the rest of the workflow is reused.
 
 ---
 
@@ -571,7 +571,7 @@ azfwpolicy-platform-global  (parent — East US 2, org-wide rules)
 
 ### Same-region constraint
 
-Parent and child policies must reside in the same Azure region. All policies in this deployment live in East US 2 (`parLocation`). The Central US firewall references its child policy cross-region — this is supported by Azure but the policy resource itself must remain in East US 2.
+Parent and child policies must reside in the same Azure region. All policies in this deployment live in East US 2 (`parLocation`). The Central US firewall references its child policy cross-region. This is supported by Azure but the policy resource itself must remain in East US 2.
 
 ---
 
@@ -607,7 +607,7 @@ Web VM (snet-web, /26)
 
 ### Why this path does not traverse the hub firewall
 
-The AFD → PLS connection is made via Microsoft's backbone network. The private endpoint created by AFD terminates inside Microsoft-managed infrastructure — it never enters the customer's network until it exits the PLS into `snet-pls-nat`. At that point it is already inside the landing zone VNet, moving from subnet to subnet, not traversing the hub.
+The AFD → PLS connection is made via Microsoft's backbone network. The private endpoint created by AFD terminates inside Microsoft-managed infrastructure. It never enters the customer's network until it exits the PLS into `snet-pls-nat`. At that point it is already inside the landing zone VNet, moving from subnet to subnet, not traversing the hub.
 
 The firewall only sees: (1) egress from VMs to the internet, and (2) spoke-to-spoke traffic between landing zones.
 
@@ -623,11 +623,11 @@ Each landing zone uses five subnets with NSG enforcement at every boundary:
 | snet-app | /26 | App tier | Allow snet-web CIDR inbound on app port |
 | snet-db | /26 | Data tier | Allow snet-app CIDR inbound on DB port |
 
-The separation of `snet-lb` and `snet-web` into distinct subnets — rather than placing the ILB frontend in the web subnet — enforces a hard network boundary between load balancing infrastructure and compute. This satisfies CIS/NIST segmentation requirements and contains blast radius if a web VM is compromised.
+The separation of `snet-lb` and `snet-web` into distinct subnets, rather than placing the ILB frontend in the web subnet, enforces a hard network boundary between load balancing infrastructure and compute. This satisfies CIS/NIST segmentation requirements and contains blast radius if a web VM is compromised.
 
 ### TLS design
 
-AFD terminates TLS from the client using the org's certificate (customer-managed, stored in Key Vault). AFD re-encrypts and forwards HTTPS to the ILB backend. End-to-end TLS — no cleartext segment in the traffic path.
+AFD terminates TLS from the client using the org's certificate (customer-managed, stored in Key Vault). AFD re-encrypts and forwards HTTPS to the ILB backend. End-to-end TLS means no cleartext segment in the traffic path.
 
 **Important:** AFD health probes cannot validate self-signed certificates. Backends must use CA-signed certificates or the probe will fail and the origin will be marked unhealthy, resulting in 503 responses. Do not use self-signed certs on ILB backends in production.
 
